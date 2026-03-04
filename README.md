@@ -56,6 +56,15 @@ sudo docker run hello-world
 
 你可以透過執行 `docker compose version` 確認是否安裝成功，並參考該範例啟動一個 Nginx 服務進行測試。
 
+## Kubernetes (K8S) 佈署指南
+如果你需要進一步安裝 Kubernetes 叢集，請參考：[K8S_INSTALL_GUIDE.md](./K8S_INSTALL_GUIDE.md)。
+
+該指南包含：
+1. 系統準備（Swap, SELinux, 網路參數設定）。
+2. 安裝 `kubeadm`, `kubelet`, `kubectl`。
+3. 透過 `containerd` 設定 Cgroup Driver。
+4. 初始化叢集與安裝 CNI 網路插件。
+
 ## 進階設定
 
 ### 免 sudo 執行 Docker
