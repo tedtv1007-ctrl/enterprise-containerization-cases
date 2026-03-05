@@ -7,12 +7,29 @@ set -e
 
 echo "Starting K8S Bootstrap for Rocky Linux 10.1..."
 
-# 1. Disable Swap (Required for K8S)
-echo "[1/6] Disabling Swap..."
-sudo swapoff -a
-sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+# 1. Environment Check
+echo "[0/6] Checking Environment..."
+OS_VERSION=$(grep "VERSION_ID" /etc/os-release | cut -d'=' -f2 | tr -d '"')
+if [[ "$OS_VERSION" != "10.1" ]]; then
+    echo "Warning: This script is optimized for Rocky Linux 10.1. Detected version: $OS_VERSION"
+    read -p "Continue anyway? (y/n) " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        exit 1
+    fi
+fi
 
-# 2. Kernel Modules & Sysctl
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root (or with sudo)"
+   exit 1
+fi
+
+# 2. Disable Swap (Required for K8S)
+echo "[1/6] Disabling Swap..."
+swapoff -a
+sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
+# 3. Kernel Modules & Sysctl
 echo "[2/6] Configuring Kernel Modules & Network..."
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay

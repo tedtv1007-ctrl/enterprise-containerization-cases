@@ -23,17 +23,44 @@
 - [企業級 GitLab 自建指南 (Rocky Linux 10)](./labs/gitlab-self-hosted.md)
 - [GitLab Runner (K8S Executor) 部署指南](./labs/gitlab-runner-setup.md)
 - [企業級 K8S 架構強化建議](./ENTERPRISE_K8S_HARDENING.md)
-- **待實作項目**：
-    - [ ] Cilium (eBPF) 網路安全隔離
-    - [ ] Vault + ESO 外部密鑰同步
-    - [ ] Velero 叢集備份與災難復原
+- [Cilium (eBPF) 網路安全隔離](./labs/cilium-hubble-setup.md)
+- [Vault + ESO 外部密鑰同步](./labs/vault-eso-setup.md)
+- [Velero 叢集備份與災難復原](./labs/velero-dr-backup.md)
+- [Prometheus + Grafana 監控與告警](./labs/prometheus-grafana-stack.md)
 
 ---
 
 ## 🛠 系統環境需求
-- **OS**: Rocky Linux 10 (Red Quartz)
+- **虛擬化平台**: Windows Hyper-V ([環境配置指南](./docs/hyperv-setup-guide.md))
+- **OS**: Rocky Linux 10.1 (Red Quartz)
 - **Arch**: x86_64 / arm64
 - **User**: 具備 `sudo` 權限的非 root 使用者
+
+---
+
+## ⚡ 快速上手 (Windows Hyper-V)
+
+如果您在 Windows 環境下，可以使用我們提供的自動化腳本快速建立實驗室：
+
+1. **建立虛擬機環境** (需管理員權限 PowerShell):
+   ```powershell
+   .\scripts\setup-hyperv-lab.ps1
+   ```
+   這會自動建立 `K8S-Internal` 交換器、下載 Rocky Linux ISO 並建立兩台預設規格的虛擬機。
+
+2. **快速複製虛擬機** (當您裝好一台乾淨的範本後):
+   ```powershell
+   .\scripts\fast-clone-vm.ps1 -SourceVMName "Template-VM" -NewVMName "New-Node"
+   ```
+
+3. **網路排除故障**:
+   如果虛擬機無法上網，請在 Windows 管理員 PowerShell 執行：
+   ```powershell
+   net stop winnat; net start winnat
+   New-NetNat -Name "K8S-NAT-Net" -InternalIPInterfaceAddressPrefix "192.168.100.0/24" -ErrorAction SilentlyContinue
+   ```
+
+---
 
 ## 📚 專案目錄導覽
 1. [INDEX.md](./INDEX.md) - 詳細技術演進路線圖

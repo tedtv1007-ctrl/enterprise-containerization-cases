@@ -1,0 +1,11 @@
+# ISO files
+*.iso
+scripts/*.iso
+
+# VM files
+C:\Hyper-V\EnterpriseLab\
+*.vhdx
+
+# OS temporary files
+.DS_Store
+Thumbs.db

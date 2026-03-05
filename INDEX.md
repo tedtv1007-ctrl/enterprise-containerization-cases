@@ -9,7 +9,7 @@
 - **多服務編排**：[Docker Compose 測試範例](./DOCKER_COMPOSE_EXAMPLE.md)
 - **企業強化**：
     - [企業級私有鏡像倉庫 Harbor 部署指南](./labs/harbor-setup.md)
-    - [ ] 容器安全性掃描 (Trivy)
+    - [容器安全性掃描 (Trivy)](./labs/harbor-setup.md#trivy)
 
 ### 第二階段：叢集基礎建設 (Cluster Infrastructure)
 - **叢集基礎建設**：[Kubernetes (Kubeadm) 安裝指南](./K8S_INSTALL_GUIDE.md)
