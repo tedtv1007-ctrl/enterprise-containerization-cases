@@ -23,7 +23,7 @@ graph TD
     subgraph "Kubernetes 叢集"
         subgraph "Master Node (VM2-K8S: 192.168.100.20)"
             Kubeadm[Kubeadm / Kubelet<br>K8S 控制平面]
-            Cilium_M[Cilium (eBPF)<br>網路與安全插件]
+            Cilium_M["Cilium (eBPF)<br>網路與安全插件"]
             Vault[HashiCorp Vault<br>機密資訊管理]
         end
 
@@ -33,7 +33,7 @@ graph TD
             Prometheus[Prometheus + Grafana<br>監控與視覺化告警]
             APISIX[APISIX Ingress<br>API 閘道器]
             Velero[Velero<br>備份與災難復原]
-            Cilium_W[Cilium (eBPF)<br>網路與安全插件]
+            Cilium_W["Cilium (eBPF)<br>網路與安全插件"]
         end
     end
 
