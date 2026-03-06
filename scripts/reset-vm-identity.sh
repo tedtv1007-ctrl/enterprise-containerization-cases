@@ -9,7 +9,7 @@ fi
 
 NEW_HOSTNAME=$1
 NEW_IP=$2
-GATEWAY=${3:-192.168.100.1}
+GATEWAY="${3:-192.168.100.1}"
 
 if [ -z "$NEW_HOSTNAME" ] || [ -z "$NEW_IP" ]; then
     echo "Usage: $0 <new-hostname> <new-ip> [gateway]"
@@ -23,7 +23,7 @@ dbus-uuidgen --ensure=/etc/machine-id
 systemd-machine-id-setup
 
 echo "[2/4] Setting hostname to $NEW_HOSTNAME..."
-hostnamectl set-hostname $NEW_HOSTNAME
+hostnamectl set-hostname "$NEW_HOSTNAME"
 
 echo "[3/4] Updating Network IP to $NEW_IP..."
 # Find the active connection name
